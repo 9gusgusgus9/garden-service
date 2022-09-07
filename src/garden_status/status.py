@@ -1,6 +1,6 @@
 from enum import Enum
 
-class Status(Enum):
+class GardenStatus(Enum):
     MANUAL = "MANUAL"
     AUTO = "AUTO"
     ALARM = "ALARM"
@@ -19,7 +19,7 @@ class Status(Enum):
         return self.value
 
 
-class IrrigatorStatus(ENUM):
+class IrrigatorStatus(Enum):
     READY = "READY"
     OPEN = "OPEN"
     CLOSED = "CLOSED"
@@ -34,5 +34,22 @@ class IrrigatorStatus(ENUM):
     def fromString(status):
         return switcher[status]
     
+    def toString(self):
+        return self.value
+
+
+class LedStatus(Enum):
+    ON = "ON"
+    OFF = "OFF"
+
+    switcher = {
+        "ON": LedStatus.ON,
+        "OFF": LedStatus.OFF
+    }
+
+    @staticmethod
+    def fromString(status):
+        return switcher[status]
+
     def toString(self):
         return self.value
