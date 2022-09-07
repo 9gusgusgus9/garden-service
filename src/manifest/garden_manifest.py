@@ -38,9 +38,6 @@ class Manifest:
     def setSensorboardLed(self, status):
         self.sensorboardLed = status
 
-    def getTemperature(self):
-        return self.temperature
-
     def setControllerLedOn(self, value):
         self.controllerLed1 = LedStatus.ON
         self.controllerLed2 = LedStatus.ON
@@ -54,19 +51,24 @@ class Manifest:
         self.controllerLed3 = LedStatus.OFF
         self.controllerLed4 = LedStatus.OFF
 
-    def setTemperature(self, temperature):
-        self.temperature = temperature
-        if self.temperature > 5 and slef.getIrrigatorStatus != IrrigatorStatus.OPEN:
-            self.setGardenStatus(GardenStatus.ALARM)
-            self.setSensorboardLed(LedStatus.OFF)
+    def getTemperature(self):
+        return self.temperature
 
     def getLuminosity(self):
         return self.luminosity
+
+    def setTemperature(self, temperature):
+        self.temperature = temperature
+
+        #Sarebbe meglio spostare i controlli su server.py
+        if self.temperature > 5 and slef.getIrrigatorStatus != IrrigatorStatus.OPEN:
+            self.setGardenStatus(GardenStatus.ALARM)
+            self.setSensorboardLed(LedStatus.OFF)
     
     def setLuminosity(self, luminosity):
         self.luminosity = luminosity
 
-
+        #sarebbe meglio spostare i controlli su server.py
         if self.luminosity < 5:
             self.setControllerLedOn(luminosity)
             if self.luminosity < 2:
